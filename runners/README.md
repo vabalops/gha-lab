@@ -4,7 +4,7 @@ More on authentification:
 
 <https://docs.github.com/en/packages/working-with-a-github-packages-registry/working-with-the-container-registry>
 
-login:
+Login:
 
 echo "$TOKEN" | docker login ghcr.io -u vabalops --password-stdin
 

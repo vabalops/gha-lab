@@ -5,6 +5,8 @@ jobs:
     runs-on: self-hosted
     steps:
       - name: Print greeting
-        run: echo "Hello!"
+        run: |
+          echo "Hello!"
+          echo "Hello again!"
       - name: Print goodbye
         run: echo "Bye!"

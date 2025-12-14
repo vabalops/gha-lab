@@ -1,0 +1,34 @@
+FROM debian:trixie-slim
+
+# Runner versions: https://github.com/actions/runner/releases
+ARG RUNNER_VERSION="2.329.0"
+ARG RUNNER_ARCH="x64"
+
+RUN apt update -y && apt install curl jq libicu-dev libicu76 -y
+
+RUN useradd --uid 1001 --create-home --shell /bin/bash --password '' runner \
+    && groupadd docker --gid 123 \
+    && usermod -aG sudo runner \
+    && usermod -aG docker runner \
+    && echo "%sudo ALL=(ALL:ALL) NOPASSWD:ALL" > /etc/sudoers \
+    && echo "Defaults env_keep += \"DEBIAN_FRONTEND\"" >> /etc/sudoers
+
+WORKDIR /home/runner
+
+RUN curl -f -L -o runner.tar.gz https://github.com/actions/runner/releases/download/v${RUNNER_VERSION}/actions-runner-linux-${RUNNER_ARCH}-${RUNNER_VERSION}.tar.gz \
+    && tar xzf ./runner.tar.gz \
+    && rm runner.tar.gz
+
+
+# Prevents installdependencies.sh from prompting the user and blocking the image creation
+ARG DEBIAN_FRONTEND=noninteractive
+
+RUN ./bin/installdependencies.sh
+
+COPY start.sh start.sh
+
+RUN chmod +x start.sh && chown runner:runner start.sh
+
+USER runner
+
+ENTRYPOINT ["./start.sh"]

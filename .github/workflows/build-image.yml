@@ -27,7 +27,7 @@ jobs:
       - name: Build and push
         uses: docker/build-push-action@v6.18.0
         with:
-          context: .
+          context: runners
           file: ./runners/Containerfile
           platforms: linux/amd64 #,linux/arm64
           no-cache: true

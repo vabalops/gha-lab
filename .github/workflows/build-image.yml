@@ -1,0 +1,33 @@
+name: Build Container Image
+
+on:
+  push:
+    branches:
+      - master
+    paths:
+      - 'runners/Containerfile'
+      - 'runners/start.sh'
+  workflow_dispatch:
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@6
+        with:
+            sparse-checkout: |
+                runners
+
+      - name: Set up QEMU
+        uses: docker/setup-qemu-action@v3.7.0
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@3.11.1
+
+      - name: Build and push
+        uses: docker/build-push-action@v6.18.0
+        with:
+          context: .
+          file: ./runners/Containerfile
+          platforms: linux/amd64,linux/arm64
+          no-cache: true

@@ -1,9 +1,7 @@
 #!/bin/bash
 
-sleep 5000
-
-REPOSITORY=${REPO:-$(cat /run/secrets/REPO)}
-ACCESS_TOKEN=${TOKEN:-$(cat /run/secrets/TOKEN)}
+REPOSITORY=$REPO
+ACCESS_TOKEN=$TOKEN
 
 # To generate more unique runner names when launching multiple instances
 S=$((1 + RANDOM % 5))

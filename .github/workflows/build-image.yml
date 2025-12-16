@@ -29,5 +29,5 @@ jobs:
         with:
           context: .
           file: ./runners/Containerfile
-          platforms: linux/amd64,linux/arm64
+          platforms: linux/amd64 #,linux/arm64
           no-cache: true

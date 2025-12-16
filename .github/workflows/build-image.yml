@@ -31,4 +31,6 @@ jobs:
           file: ./runners/Containerfile
           platforms: linux/amd64 #,linux/arm64
           push: true
+          secrets: |
+            GIT_AUTH_TOKEN=${{ secrets.BUILD_TOKEN }}
           tags: ghcr.io/${{ github.repository_owner }}/runner:latest

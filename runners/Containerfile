@@ -19,7 +19,6 @@ RUN curl -f -L -o runner.tar.gz https://github.com/actions/runner/releases/downl
     && tar xzf ./runner.tar.gz \
     && rm runner.tar.gz
 
-
 # Prevents installdependencies.sh from prompting the user and blocking the image creation
 ARG DEBIAN_FRONTEND=noninteractive
 

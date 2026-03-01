@@ -1,7 +1,7 @@
 FROM debian:trixie-slim
 
 # Runner versions: https://github.com/actions/runner/releases
-ARG RUNNER_VERSION="2.329.0"
+ARG RUNNER_VERSION="2.331.0"
 ARG RUNNER_ARCH="x64"
 
 RUN apt update -y && apt install curl jq libicu-dev libicu76 -y
